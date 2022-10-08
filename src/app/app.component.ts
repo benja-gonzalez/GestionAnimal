@@ -7,6 +7,7 @@ import { NavigationService } from './infrastructure/services/navigation.service'
 import { debounceTime } from 'rxjs/operators';
 import { getMockDataError } from './infrastructure/data/mock-errors';
 import { EErrorTitle, IConfigErrorData, TStatusError } from './infrastructure/entities/config-error-data.interface';
+import { LoadingService } from './infrastructure/services/loading.service';
 
 @Component({
 	selector     : 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	private _unsuscribeAll: Subscription[] = [];
 
 	title: string = 'GestionAnimalApp';
-	isLoading: boolean = true;
+	isLoading: boolean = false;
 	itemsNav!: Observable<ReadonlyArray<Link>>;
 	current  : string = '';
 	showInput: boolean = false;
@@ -33,10 +34,17 @@ export class AppComponent implements OnInit, OnDestroy {
 	display__error: boolean = false;
 
 	constructor(
-		public _navService: NavigationService
+		public _navService: NavigationService,
+		public loadingService: LoadingService
 	) {
 		this._unsuscribeAll = [
 			this._navService.getNavigation().subscribe(),
+			this.loadingService.isFinish$().subscribe(loading => {
+				this.isLoading = loading
+				if (loading === false) {
+					this.matDrawer?.close();
+				}
+			}),
 			...this._unsuscribeAll
 		];
 	}
@@ -48,13 +56,6 @@ export class AppComponent implements OnInit, OnDestroy {
 			this._navService.itemsNav$.subscribe(
 				(items: ReadonlyArray<Link>) => {
 					this.itemsNav = of(items);
-				}
-			),
-			this._navService.isNavigationStart$.subscribe(
-				ev => {
-					if (ev == false) {
-						this.matDrawer?.close();
-					}
 				}
 			),
 			getMockDataError().subscribe(

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { debounceTime, tap } from 'rxjs/operators'
-import { Link } from '../entities/navigation.interface';
 
+import { Link } from '../entities/navigation.interface';
+import { LoadingService } from './loading.service';
 import { navItems } from '../data/mock-nav-items';
 
 @Injectable({
@@ -12,25 +13,23 @@ import { navItems } from '../data/mock-nav-items';
 export class NavigationService {
 
     private _itemsNav: BehaviorSubject<ReadonlyArray<Link>> = new BehaviorSubject<ReadonlyArray<Link>>([]);
-    private _navigationStartBehavior: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-    isNavigationStart$: Observable<boolean> = this._navigationStartBehavior.asObservable();
 	navigationItems = navItems;
 
     constructor(
-        private _router: Router
+        private _router: Router,
+        public loadingService: LoadingService
     ) {
         this._itemsNav = new BehaviorSubject(this.navigationItems);
         this._router.events.subscribe(
             ev => {
                 if (ev instanceof NavigationStart) {
-                    this._navigationStartBehavior.next(true);
+                    this.loadingService.setStateLoading(true);
                 }
                 if (ev instanceof NavigationEnd) {
-                    this._navigationStartBehavior.next(false);
+                    this.loadingService.setStateLoading(false);
                 }
             }
-        )
+        );
 	}
 
 	get itemsNav$() { return this._itemsNav.asObservable(); }
