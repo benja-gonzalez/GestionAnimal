@@ -1,18 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 // MODULES
 import { MaterialModule } from '../../material.module';
+import { CardComponent } from './card/card.component';
 // COMPONENTS
-import { NavigationComponent } from '../features/navigation/navigation.component';
 
 @NgModule({
-	declarations: [
-    	NavigationComponent
-	],
+	declarations: [ 
+    	CardComponent
+  	],
 	imports: [
-		BrowserModule,
-		MaterialModule
+		CommonModule,
+    	MaterialModule
 	],
-	providers: []
+	exports: [
+		CardComponent
+	]
 })
 export class FeaturesModule { }

@@ -1,10 +1,44 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<mat-progress-bar color="prmiry" *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-<app-navigation></app-navigation>
+<section class="main-content fade__in">
+	<mat-drawer-container class="example-container m-zero-auto" autosize>
+		<!-- MAT DRAWER SIDENAV -->
+		<mat-drawer #drawer class="example-sidenav d-flex" mode="over">
+			<!-- TITLE SIDENAV -->
+			<div class="title">
+				MENU
+			</div>
+			<!-- LIST OF NAVIGATIONS ITEMS -->
+			<mat-list class="list">
+				<mat-list-item 
+					[routerLink]="['/'+item.link]"
+					routerLinkActive="router-link-active" 
+					[class.active]="current === item.link"
+					(click)="setCurrentLink(item.link)" 
+					class="list-item" 
+					*ngFor="let item of (itemsNav | async)">
+					{{ item.view }}
+				</mat-list-item>
+			</mat-list>
+		</mat-drawer>
+		<!-- CONTENT NAVIGATION -->
+		<div class="example-sidenav-content">
+			<!-- BUTTON CLOSE SIDENAV -->
+			<button class="m-zero-auto absolute" mat-mini-fab (click)="drawer.toggle()">
+				<mat-icon>menu</mat-icon>
+			</button>
+			<!-- PAGES -->
+			<div *ngIf="!display__error" class="outlet">
+				<router-outlet></router-outlet>
+			</div>
+			<!-- ERRORS -->
+			<div class="outlet" [class.loading]="isLoading" *ngIf="display__error">
+				<ga-simple-error 
+					[displayed_error]="getError(400)"
+					></ga-simple-error>
+			</div>
+		</div>
+	  
+	</mat-drawer-container>
+	  
+</section>

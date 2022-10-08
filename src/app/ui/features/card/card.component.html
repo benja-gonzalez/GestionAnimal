@@ -1,0 +1,26 @@
+<!-- CARD -->
+<mat-card class="example-card mt__2">
+    <!-- CONTENT GROUP TITLE -->
+    <mat-card-title-group>
+        <!-- TITLE -->
+        <mat-card-title *ngIf="title">{{ title }}</mat-card-title>
+        <!-- SUBTITLE -->
+        <mat-card-subtitle *ngIf="subtitle">{{ subtitle }}</mat-card-subtitle>
+        <!-- IMAGE {{ MD}} -->
+        <img *ngIf="image && size === 'md'" mat-card-md-image [src]="image.src" [alt]="image.alt" />
+        <!-- IMAGE {{ LG }} -->
+        <img *ngIf="image && size === 'lg'" mat-card-lg-image [src]="image.src" [alt]="image.alt" />
+        <!-- IMAGE {{ SM }} -->
+        <img *ngIf="image && size === 'sm'" mat-card-sm-image [src]="image.src" [alt]="image.alt" />
+    </mat-card-title-group>
+    <!-- CONTENT GENERAL -->
+    <mat-card-content *ngIf="content">
+        <div *ngFor="let data of (content$ | async)">
+            {{ data }}
+        </div>
+    </mat-card-content>
+    <!-- ACTIONS -->
+    <mat-card-actions *ngIf="actions">
+        <button *ngFor="let text of actionText" mat-button>{{ text }}</button>
+    </mat-card-actions>
+</mat-card>

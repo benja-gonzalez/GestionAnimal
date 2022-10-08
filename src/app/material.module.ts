@@ -1,37 +1,56 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
-import { LayoutModule } from '@angular/cdk/layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+// CDK
+import {A11yModule} from '@angular/cdk/a11y';
+import {BidiModule} from '@angular/cdk/bidi';
+import {ObserversModule} from '@angular/cdk/observers';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {PlatformModule} from '@angular/cdk/platform';
+import {PortalModule} from '@angular/cdk/portal';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar'
 
 @NgModule({
-  imports: [
-    MatGridListModule,
-	MatCardModule,
-	MatMenuModule,
-	MatIconModule,
-	MatButtonModule,
-	LayoutModule,
-	MatToolbarModule,
-	MatSidenavModule,
-	MatListModule
-  ],
-  exports: [
-    MatGridListModule,
-	MatCardModule,
-	MatMenuModule,
-	MatIconModule,
-	MatButtonModule,
-	LayoutModule,
-	MatToolbarModule,
-	MatSidenavModule,
-	MatListModule
-  ]
+  	exports: [
+		A11yModule,
+		BidiModule,
+		ObserversModule,
+		OverlayModule,
+		PlatformModule,
+		PortalModule,
+		CdkStepperModule,
+		CdkTableModule,
+		CdkTreeModule,
+		DragDropModule,
+		// Material
+		MatBadgeModule,
+		MatBottomSheetModule,
+		MatButtonModule,
+		MatButtonToggleModule,
+		MatRadioModule,
+		MatCardModule,
+		MatSidenavModule,
+		MatIconModule,
+		MatListModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatDialogModule,
+		MatProgressBarModule
+  	]
 })
 export class MaterialModule { }

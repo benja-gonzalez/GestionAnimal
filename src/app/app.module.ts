@@ -3,20 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 // MATERIAL MODULE
 import { MaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // COMPONENTS
-import { HomeComponent } from './ui/pages/home/home.component';
-import { NavigationComponent } from './ui/features/navigation/navigation.component';
+import { FeaturesModule } from './ui/features/features.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './ui/shared/shared.module';
 
 @NgModule({
 	declarations: [
-		AppComponent,
-  		HomeComponent,
-    	NavigationComponent
+		AppComponent
 	],
 	imports: [
 		BrowserModule,
-		MaterialModule
+		AppRoutingModule,
+		RouterModule,
+		MaterialModule,
+		BrowserAnimationsModule,
+		FeaturesModule,
+		SharedModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

@@ -1,4 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+@import './colors.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+    margin: 0;
+    max-width: 100% !important;
+    min-width: 400px !important;
+    background-color: $gray_gainsboro;
+
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+
+    // ERRORS
+    section.main { 
+        margin: 2rem;
+        padding: $padding;
+        .mt__2 {
+            margin-top: 1rem;
+        }
+        img.image__error {
+            max-width: 80% !important;
+            max-height: 80% !important;
+            background-color: $gray_light;
+            filter: grayscale(100%);
+        }
+        div.alert {
+            width: calc(100% - 2rem) !important;
+            padding: $padding !important;
+            color: $white !important;
+            border-radius: $border_radius_default;  
+            &.alert__danger {
+                background-color: $danger !important;
+            }
+            &.alert__success {
+                background-color: $success_medium !important;
+            }
+            &.alert__info {
+                background-color: $info !important;
+            }
+        }
+    }
+    // ANIMATIONS FADE-IN | FADE-OUT
+    .fade__in {
+        animation: fadeIn 1.4s;
+    }
+    .fade__out {
+        animation: fadeOut 1s;
+    }
+}
+// KEY FRAMES
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
